@@ -1,9 +1,10 @@
 import { NavLink } from "react-router";
+import { twMerge } from "tailwind-merge";
 
 interface Tab {
 	id: string;
 	label: string;
-	active?: boolean;
+	disabled?: boolean;
 }
 
 interface TabsProps {
@@ -19,11 +20,13 @@ const Tabs = ({ tabs }: TabsProps) => {
 						<NavLink
 							to={tab.id}
 							key={tab.id}
-							className={({ isActive }) => `
-                px-4 py-2.5 text-sm font-medium border-r border-gray-300 last:border-r-0
-                ${isActive ? "bg-gray-50 text-gray-800" : "bg-white text-gray-700 hover:bg-gray-50"}
-                transition-colors duration-150
-              `}>
+							className={({ isActive }) =>
+								twMerge(
+									"px-4 py-2.5 text-sm font-medium border-r border-gray-300 last:border-r-0 transition-colors duration-150",
+									isActive ? "bg-gray-50 text-gray-800" : " bg-white text-gray-700 hover:bg-gray-50",
+									tab.disabled && "pointer-events-none"
+								)
+							}>
 							{tab.label}
 						</NavLink>
 					);

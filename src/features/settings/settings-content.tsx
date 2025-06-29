@@ -2,15 +2,15 @@ import Tabs from "@/components/tabs";
 import { Outlet } from "react-router";
 
 const TabList = [
-	{ id: "details", label: "My details" },
-	{ id: "profile", label: "Profile" },
-	{ id: "password", label: "Password" },
-	{ id: "team", label: "Team" },
-	{ id: "plan", label: "Plan" },
+	{ id: "details", label: "My details", disabled: true },
+	{ id: "profile", label: "Profile", disabled: true },
+	{ id: "password", label: "Password", disabled: true },
+	{ id: "team", label: "Team", disabled: true },
+	{ id: "plan", label: "Plan", disabled: true },
 	{ id: "roles", label: "Roles" },
-	{ id: "notifications", label: "Notifications" },
-	{ id: "integrations", label: "Integrations" },
-	{ id: "api", label: "API" },
+	{ id: "notifications", label: "Notifications", disabled: true },
+	{ id: "integrations", label: "Integrations", disabled: true },
+	{ id: "api", label: "API", disabled: true },
 ];
 
 const SettingsContent = () => {

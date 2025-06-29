@@ -1,16 +1,15 @@
-import { flexRender, getCoreRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
-
-import { UserRolesColumns } from "../../utils/user-roles-table-utils";
+import { flexRender, getCoreRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
 
 import { QueryKeys } from "@/lib/constants";
 import { getUserRoles } from "@/services/get-user-roles";
 import type { Role } from "@/types/role";
 import Button from "@/ui/button";
 import { useQuery } from "@tanstack/react-query";
-import { DownloadCloud } from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, DownloadCloud } from "lucide-react";
 import { useEffect } from "react";
 import { useLoaderData } from "react-router";
 import { toast } from "sonner";
+import { UserRolesColumns } from "../../utils/user-roles-table-utils";
 
 const UserRolesTable = () => {
 	const initialRoles = useLoaderData<{ roles: Role[]; error: string | undefined }>() || { roles: [], error: undefined };
@@ -29,6 +28,13 @@ const UserRolesTable = () => {
 		getCoreRowModel: getCoreRowModel(),
 		enableRowSelection: true,
 		getSortedRowModel: getSortedRowModel(),
+		getPaginationRowModel: getPaginationRowModel(),
+		initialState: {
+			pagination: {
+				pageIndex: 0,
+				pageSize: 10,
+			},
+		},
 	});
 
 	useEffect(() => {
@@ -46,9 +52,9 @@ const UserRolesTable = () => {
 				</Button>
 			</div>
 			<div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm">
-				<div className="overflow-x-auto overflow-y-auto max-h-96 slim-scrollbar">
-					<table className="min-w-full bg-white relative">
-						<thead className="bg-gray-50 border-b border-gray-200 sticky top-0 z-10">
+				<div className="overflow-x-auto">
+					<table className="min-w-full bg-white ">
+						<thead className="bg-gray-50 border-b border-gray-200">
 							{table.getHeaderGroups().map((headerGroup) => (
 								<tr key={headerGroup.id}>
 									{headerGroup.headers.map((header) => (
@@ -71,6 +77,25 @@ const UserRolesTable = () => {
 							))}
 						</tbody>
 					</table>
+				</div>
+				<div className="flex items-center justify-between px-4 py-2 border-t border-gray-200 bg-white">
+					<div className="text-sm text-gray-600">
+						Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+					</div>
+					<div className="flex items-center gap-2">
+						<Button onClick={() => table.setPageIndex(0)} disabled={!table.getCanPreviousPage()}>
+							<ChevronsLeft size={18} />
+						</Button>
+						<Button onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
+							<ChevronLeft size={18} />
+						</Button>
+						<Button onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
+							<ChevronRight size={18} />
+						</Button>
+						<Button onClick={() => table.setPageIndex(table.getPageCount() - 1)} disabled={!table.getCanNextPage()}>
+							<ChevronsRight size={18} />
+						</Button>
+					</div>
 				</div>
 			</div>
 		</div>

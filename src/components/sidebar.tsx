@@ -4,7 +4,7 @@ import Button from "@/ui/button";
 import { Link } from "react-router";
 import { twMerge } from "tailwind-merge";
 import FeaturedCard from "./featured-card/featured-card";
-import Searchbar from "./search-bar";
+import Searchbar from "./search-bar/search-bar";
 import SidebarHeader from "./sidebar-header";
 
 const SidebarRoutes = [

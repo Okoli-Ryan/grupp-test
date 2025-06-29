@@ -27,14 +27,12 @@ const Sidebar = ({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: React.Disp
 					isOpen ? "translate-x-0" : "-translate-x-full"
 				)}>
 				<div className="bg-white border-r border-gray-200 flex flex-col h-full">
-					{/* Header */}
 					<SidebarHeader isOpen={isOpen} setIsOpen={setIsOpen} />
 
 					<div className="px-6 mb-6">
 						<Searchbar />
 					</div>
 
-					{/* Navigation */}
 					<div className="overflow-y-auto slim-scrollbar max-h-[calc(100dvh-260px)] flex-1">
 						<div className="flex-1 px-4">
 							<nav className="space-y-1">
@@ -57,8 +55,6 @@ const Sidebar = ({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: React.Disp
 
 						<FeaturedCard />
 					</div>
-
-					{/* User Account */}
 				</div>
 				<div className="px-6 ">
 					<div className="flex justify-between border-t border-gray-200 mt-auto">
